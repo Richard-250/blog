@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Section - Add Topic</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Candal&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+
+        <div class="logo">
+            <h1 class="logo-text"><span>Rich</span>Inspires</h1>
+        </div>
+        <i class="fa fa-bars menu-toggle"></i>
+        <ul class="nav">
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    Rich CYUBAHIRO
+                    <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
+                </a>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#" class="logout">Logout</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </header>
+    <!-- <<<<<<<<<<<<<< Admin Wrapper>>>>>>>> -->
+    <div class="admin-wrapper">
+
+        <!-- <<<<<<< left sidebar >>>>>> -->
+
+        <div class="left-sidebar">
+            <ul>
+                <li><a href="../posts/index.html">Manage Posts</a></li>
+                <li><a href="../users/index.html">Manage Users</a></li>
+                <li><a href="./index.html">Manage Topics</a></li>
+            </ul>
+        </div>
+
+
+        <!-- <<<<<< Admin content >>>>> -->
+
+        <div class="admin-content">
+            <div class="button-group">
+                <a href="../posts/create.html" class="btn btn-big">Add Tipic</a>
+                <a href="../posts/index.html" class="btn btn-big">Manage Topics</a>
+            </div>
+
+            <div class="content">
+
+                <h2 class="page-title">Add Topics</h2>
+
+                <form action="create.html" method="post">
+                    <div>
+                        <label>Title</label>
+                        <input type="text" name="title" class="text-input">
+                    </div>
+               
+                    <div>
+                    <label>Name</label>
+                    <textarea name="description" id="name" rows="2" cols="109"></textarea>
+                </div>
+
+                    <div>
+                        <label>Description</label>
+                        <select name="topic">
+                         <option value="poetry"> Poetry</option>  
+                         <option value="life lessons"> Life Lessons</option>  
+                         <option value="noval"> Noval</option>  
+
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-big">Add Post</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- <<<<<<<<<<foooter>>>>> -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js"
+        integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj+KsslFkCOt3TvJrX2AV/Gc3wOqA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <!-- <<<<<<<< ckeditor>>>>>>>> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/44.1.0/ckeditor.js"
+        integrity="sha512-BU+QCwxeDY9z2dxlQTXmWa51dSTOd6XAO72ALOOgCrvXur19ec1yCg1Z7HiqodSPqO0UdWgsGfTPY+dmeVvA5A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+
+    <script src="../../js/script.js"></script>
+</body>
+
+</html>
