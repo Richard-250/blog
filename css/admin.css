@@ -115,3 +115,28 @@ form div
 {
     margin: 15px;
 }
+
+
+.create-input input
+{
+    width: 80%;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.create-descript textarea
+{
+    width: 80%;
+    height: 70px;
+    border-radius: 5px;
+}
+
+button.save-topic
+{
+    width: 80%;
+    height: 30px;
+    background: #007e83;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}

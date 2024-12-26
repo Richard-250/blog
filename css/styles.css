@@ -318,9 +318,10 @@ header ul li ul li a:hover
     height: 270px;
     margin: 20px auto;
     border-radius: 5px;
-    background: white;
+    background: rgb(217, 216, 216);
     position: relative;
-    border: 1px solid red;
+    border-radius: 5px;
+
 }
 
 .content .popular .post
@@ -361,7 +362,8 @@ header ul li ul li a:hover
     width: 40%;
     height: 100%;
     float: left;
-    border: 1px solid blue;
+    border-radius: 5px;
+    
 }
 
 .content .main-content .post .post-preview
@@ -369,7 +371,8 @@ header ul li ul li a:hover
     width: 60%;
     float: right;
     padding: 10px;
-    border: 1px solid green;
+    border-radius: 5px;
+  
 }
 
 .content .main-content .recent-post-title
@@ -412,7 +415,7 @@ header ul li ul li a:hover
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 1px solid #e0e0e0;
+  
 }
 
 .content .sidebar .section.topics ul li a
@@ -486,21 +489,21 @@ header ul li ul li a:hover
     color: #d3d3d3;
     height: 400px;
     position: relative;
-    border: 1px solid red;
+  
 }
 
 .footer .footer-content
 {
     height: 350px;
     display: flex;
-    border: 2px solid blue;
+ 
 }
 
 .footer .footer-content .footer-section
 {
     flex: 1;
     padding: 25px;
-    border: 1px solid white;
+   
 }
 
 .footer .footer-content h1,
