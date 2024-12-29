@@ -140,3 +140,17 @@ button.save-topic
     border-radius: 5px;
     font-size: 16px;
 }
+
+.resize
+{
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.title_edit
+{
+    max-width: 190px; 
+  overflow: scroll;
+  white-space: nowrap;
+}

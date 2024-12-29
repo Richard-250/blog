@@ -43,6 +43,10 @@
 
  
 
+// <<<<<<<<< manage and displayUsers on the table>>>>>>>>>
+
+// <<<<<<<<register>>>>>>
+
 function regist(event) {
   
   event.preventDefault();
@@ -78,7 +82,7 @@ function regist(event) {
   form.reset();
 }
 
-
+// <<<<<<<<<<< displayUsers on the table>>>>>>>>>
 
 function displayUsers() {
   const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -105,6 +109,8 @@ function displayUsers() {
   });
 }
 
+// <<<<<<<<<<<<<< deleteUser(index)>>>>>>>>>>>
+
 function deleteUser(index) {
   
   const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -116,6 +122,8 @@ function deleteUser(index) {
   
   displayUsers();
 }
+
+// <<<<<<<<<<<<<<, editUser(index)>>>>>>>>>
 
 function editUser(index) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -139,39 +147,50 @@ function editUser(index) {
 window.onload = displayUsers;
 
 
+// <<<<<<<<<<<<<<<<<< submiting and managing posts>>>>>>>>>>
 
 document.getElementById('postForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form from submitting
+  event.preventDefault(); 
 
-  // Get form data
+  
   const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const dates = document.getElementById('dates').value;
   const image = document.getElementById('image').files[0]; // File object
   const body = CKEDITOR.instances.editor.getData();
   const topic = document.getElementById('topic').value;
 
-  // store data to localStorage
-  
+  // Create post data object
   const postData = {
-      title,
-      body,
-      topic,
+    id: Date.now(),
+    title,
+    author,
+    dates,
+    body,
+    topic,
+  };
+
+  // Function to save data to localStorage
+  const savePost = (post) => {
+    const existingPosts = JSON.parse(localStorage.getItem('posts')) || []; 
+    existingPosts.push(post); 
+    localStorage.setItem('posts', JSON.stringify(existingPosts)); 
+    alert('Post saved!');
   };
 
   if (image) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-          postData.image = event.target.result; // Base64 string
-          localStorage.setItem('post', JSON.stringify(postData));
-          alert('Post saved!');
-      };
-      reader.readAsDataURL(image);
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      postData.image = event.target.result; 
+      savePost(postData);
+    };
+    reader.readAsDataURL(image);
   } else {
-      localStorage.setItem('post', JSON.stringify(postData));
-      alert('Post saved!');
+    savePost(postData);
   }
+  document.getElementById('postForm').reset();
+  CKEDITOR.instances.editor.setData('type here!');
+
 });
-  
-
-
 
 
