@@ -32,7 +32,7 @@
                     <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
                 </a>
                 <ul>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="../posts/index.html">Dashboard</a></li>
                     <li><a href="#" class="logout">Logout</a></li>
                 </ul>
             </li>
@@ -47,7 +47,7 @@
     <div class="left-sidebar">
           <ul>
             <li><a href="../posts/index.html">Manage Posts</a></li>
-            <li><a href="./users/index.html">Manage Users</a></li>
+            <li><a href="./index.html">Manage Users</a></li>
             <li><a href="../topics/index.html">Manage Topics</a></li>
           </ul>
     </div>
@@ -64,34 +64,19 @@
          <div class="content">
                
           <h2 class="page-title">Manage Users</h2>
-
-          <table>
+          <table class="table">
             <thead>
+              <tr>
                 <th>SN</th>
-                <th>Username</th>
-                <th>Role</th>
-                <th colspan="2">Action</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
             </thead>
-          <tbody>
-            <tr>
-                <td>1</td>
-                <td>Rich</td>
-                <td>Admin</td>
-                <td><a href="#" class="edit">edit</a></td>
-                <td><a href="#" class="delete">delete</a></td>
-          
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>alexandre</td>
-                <td>Author</td>
-
-                <td><a href="#" class="edit">edit</a></td>
-                <td><a href="#" class="delete">delete</a></td>
-          
-            </tr>
-          </tbody>
-        </table>
+            <tbody>
+              <!-- Rows will be dynamically added here -->
+            </tbody>
+          </table>
 
          </div>
 
