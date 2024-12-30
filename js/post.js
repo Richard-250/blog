@@ -23,7 +23,7 @@ function displayPosts() {
         <td>
           <button onclick="editPost(${index})">Edit</button>
           <button onclick="deletePost(${index})">Delete</button>
-          <button onclick="publish(${index})">publish</button>
+        
         </td>
       `;
       tablesBody.appendChild(rows);
@@ -77,6 +77,7 @@ function editPost(index) {
       }
     };
   
+    
     function savePosts(posts) {
       localStorage.setItem("posts", JSON.stringify(posts));
       alert("Post updated successfully!");
@@ -94,16 +95,83 @@ function editPost(index) {
 
 function deletePost(index) {
   
-    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+    const posts = JSON.parse(localStorage.getItem('posts')) || []
   
     posts.splice(index, 1);
     
     localStorage.setItem('posts', JSON.stringify(posts));
     
-    
     displayPosts();
   }
- 
+  
+    
+  
+
+  window.onload = displayPosts;
+// // Function to publish a post
+// function publish(index) {
+//     const posts = JSON.parse(localStorage.getItem('posts')) || [];
+//     // const publishedPosts = JSON.parse(localStorage.getItem('publishedPosts')) || [];
+//     console.log(posts)
+//     // Get the post to publish
+//     const postToPublish = posts[index];
+    
+//     if (!postToPublish) {
+//         alert("Post not found!");
+//         return;
+//     }
+    
+//     // Add publish date
+//     postToPublish.publishDate = new Date().toISOString();
+    
+//     // Add to published posts
+//     // publishedPosts.push(postToPublish);
+    
+//     // Save to localStorage
+//     localStorage.setItem('publishedPosts', JSON.stringify(publishedPosts));
+    
+//     // Update UI
+//     alert("Post published successfully!");
+    
+//     // Optionally, remove from draft posts
+//     // posts.splice(index, 1);
+//     // localStorage.setItem('posts', JSON.stringify(posts));
+    
+//     displayPosts();
+// }
 
 
-window.onload = displayPosts;
+
+
+
+
+
+
+
+
+// //Function to display posts (updated)
+// function displayPosts() {
+//     const posts = JSON.parse(localStorage.getItem('posts')) || [];
+//     const tablesBody = document.querySelector(".table-post tbody");
+    
+//     tablesBody.innerHTML = "";
+    
+//     posts.forEach((post, index) => {
+//         const rows = document.createElement("tr");
+        
+//         rows.innerHTML = `
+//             <td>${index + 1}</td>
+//             <td><img src="${post.image}" class="resize"></td>
+//             <td class="title_edit">${post.title}</td>
+//             <td>${post.dates}</td>
+//             <td>${post.topic}</td>
+//             <td>${post.author}</td>
+//             <td>
+//                 <button onclick="editPost(${index})">Edit</button>
+//                 <button onclick="deletePost(${index})">Delete</button>
+//                 <button onclick="publish(${index})">Publish</button>
+//             </td>
+//         `;
+//         tablesBody.appendChild(rows);
+//     });
+// }

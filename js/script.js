@@ -41,6 +41,8 @@
 
  }) 
 
+
+ 
  
 
 // <<<<<<<<< manage and displayUsers on the table>>>>>>>>>
@@ -150,9 +152,9 @@ window.onload = displayUsers;
 // <<<<<<<<<<<<<<<<<< submiting and managing posts>>>>>>>>>>
 
 document.getElementById('postForm').addEventListener('submit', function(event) {
+
   event.preventDefault(); 
 
-  
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const dates = document.getElementById('dates').value;
@@ -190,7 +192,11 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
   }
   document.getElementById('postForm').reset();
   CKEDITOR.instances.editor.setData('type here!');
+  
 
 });
+
+
+
 
 
