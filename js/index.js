@@ -5,9 +5,12 @@
  const renderPosts = () => {
    const postsContainer = document.getElementById('postsContainer');
    postsContainer.innerHTML = ''; 
-    
+   
+   
+
     const posts = JSON.parse(localStorage.getItem('posts')) || [];
-     console.log(posts)
+     
+
     if (posts.length === 0) {
       postsContainer.innerHTML = '<p>No posts available.</p>';
       return;
@@ -18,18 +21,19 @@
  
        postDiv.className = 'post clearfix';
  
+       
  
    postDiv.innerHTML = `
         <img src="${post.image}" alt="${post.title}" class="post-image">
         <div class="post-preview">
-        <h2><a href="./pages/single.html"> ${post.title}</a></h2>
+        <h2><a href="./pages/single.html?id=${post.id}"> ${post.title}</a></h2>
         <i class="far fa-user">${post.author}</i>
          &nbsp;
            <i class="far fa-calendar">${post.dates}</i>
             <p class="preview-text">${post.body}</p>
-            <p>Published: ${publishDate}</p>
+            <p>Published: ${post.publishDate}</p>
             <p>Topic: ${post.topic}</p>
-        <a href="./pages/single.html" class="btn read-more">Read More</a>
+        <a href="./pages/single.html?id=${post.id}" class="btn read-more">Read More</a>
         </div>
     `;
        postsContainer.appendChild(postDiv);
@@ -37,6 +41,56 @@
  
  }
  renderPosts()
+
+// <<<<<<<<<<<<<<<Search>>>>>>>>>>>>>>></search>
+
+document.getElementById('searchForm').addEventListener('submit', function (event) {
+   event.preventDefault(); // Prevent form submission
+ 
+   const query = document.getElementById('searchInput').value.trim().toLowerCase();
+   const resultsDiv = document.getElementById('postsContainer');
+ 
+   if (!query) {
+       resultsDiv.innerHTML = '<p>Please enter a search term.</p>';
+       return;
+   }
+ 
+   // Fetch data from localStorage
+   const posts = JSON.parse(localStorage.getItem('posts')) || [];
+ 
+   console.log('posts', posts)
+   // Filter books based on the query
+   const filteredPosts = posts.filter(post => 
+       post.title.toLowerCase().includes(query) || 
+       post.author.toLowerCase().includes(query)
+   );
+ 
+   // Display the results
+   if (filteredPosts.length > 0) {
+
+      resultsDiv.className = 'post clearfix';
+       resultsDiv.innerHTML = filteredPosts.map(post => `
+          
+        <img src="${post.image}" alt="${post.title}" class="post-image">
+        <div class="post-preview">
+        <h2><a href="./pages/single.html?id=${post.id}"> ${post.title}</a></h2>
+        <i class="far fa-user">${post.author}</i>
+         &nbsp;
+           <i class="far fa-calendar">${post.dates}</i>
+            <p class="preview-text">${post.body}</p>
+            <p>Published: ${post.publishDate}</p>
+            <p>Topic: ${post.topic}</p>
+        <a href="./pages/single.html?id=${post.id}" class="btn read-more">Read More</a>
+        </div>
+    `)
+
+      .join('');
+   } else {
+       resultsDiv.innerHTML = '<p>No results found.</p>';
+   }
+ });
+ 
+
 // const publishedPosts = JSON.parse(localStorage.getItem('Posts')) || [];
 // console.log(publishedPosts)
 // const container = document.getElementById('publishedPostsContainer');

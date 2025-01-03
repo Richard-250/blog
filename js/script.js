@@ -48,12 +48,9 @@
 // <<<<<<<<< manage and displayUsers on the table>>>>>>>>>
 
 // <<<<<<<<register>>>>>>
-
 function regist(event) {
-  
   event.preventDefault();
 
-  
   const form = document.querySelector('form');
   const username = form.username.value;
   const email = form.email.value;
@@ -61,91 +58,97 @@ function regist(event) {
   const passwordConf = form.passwordConf.value;
 
   if (password !== passwordConf) {
-    alert("Passwords do not match!");
-    return;
+      alert("Passwords do not match!");
+      return;
   }
 
+  // Fetch existing users or initialize an empty array
+  const users = JSON.parse(localStorage.getItem('users')) || [];
 
-  let existUsers = JSON.parse(localStorage.getItem('users')) || [];
+  const userId = Date.now();
+  // Add new user
+  users.push(
+    { 
+      id: userId,
+      username,
+     email,
+      password,
+     });
 
-  const newUser = {
-    username,
-    email,
-    password,
-  };
+  // Save updated array to local storage
+  localStorage.setItem('users', JSON.stringify(users));
 
-  
-  existUsers.push(newUser);
-
-  localStorage.setItem('users', JSON.stringify(existUsers));
+  localStorage.setItem('currentUserId', JSON.stringify (userId));
 
   alert("Registration successful!");
-  
   form.reset();
-}
-
-// <<<<<<<<<<< displayUsers on the table>>>>>>>>>
-
-function displayUsers() {
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const tableBody = document.querySelector(".table tbody");
-
-  
-  tableBody.innerHTML = "";
-
-  
-  users.forEach((user, index) => {
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${user.username}</td>
-      <td>${user.email}</td>
-      <td>
-        <button onclick="editUser(${index})">Edit</button>
-        <button onclick="deleteUser(${index})">Delete</button>
-      </td>
-    `;
-
-    tableBody.appendChild(row);
-  });
-}
-
-// <<<<<<<<<<<<<< deleteUser(index)>>>>>>>>>>>
-
-function deleteUser(index) {
-  
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-
-  users.splice(index, 1);
-  
-  localStorage.setItem('users', JSON.stringify(users));
-  
-  
   displayUsers();
 }
 
-// <<<<<<<<<<<<<<, editUser(index)>>>>>>>>>
+function displayUsers() {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const tableBody = document.getElementById("userTable");
+
+  if (!tableBody) {
+      console.error("Table body not found!");
+      return;
+  }
+
+  // Clear existing table rows
+  tableBody.innerHTML = "";
+
+  // Populate table with users
+  users.forEach((user, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+         <td>${index + 1}</td>
+          <td>${user.username}</td>
+          <td>${user.email}</td>
+          <td>
+              <button onclick="editUser(${index})">Edit</button>
+              <button onclick="deleteUser(${index})">Delete</button>
+          </td>
+      `;
+      tableBody.appendChild(row);
+  });
+}
+
+function deleteUser(index) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Remove user at the specified index
+  users.splice(index, 1);
+
+  // Save updated array to local storage
+  localStorage.setItem('users', JSON.stringify(users));
+
+  // Update the table
+  displayUsers();
+}
 
 function editUser(index) {
+
   const users = JSON.parse(localStorage.getItem('users')) || [];
+  
   const user = users[index];
 
   const newUsername = prompt("Enter new username:", user.username);
   const newEmail = prompt("Enter new email:", user.email);
 
-
   if (newUsername && newEmail) {
-    users[index] = { ...user, username: newUsername, email: newEmail };
-    localStorage.setItem('users', JSON.stringify(users));
-    alert("User updated successfully!");
-    
-    displayUsers();
+      users[index] = { username: newUsername, email: newEmail };
+
+      // Save updated array to local storage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert("User updated successfully!");
+      displayUsers();
   } else {
-    alert("Invalid input! No changes made.");
+      alert("Invalid input! No changes made.");
   }
 }
 
+// Display users on page load
 window.onload = displayUsers;
 
 
@@ -167,6 +170,7 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
     id: Date.now(),
     title,
     author,
+    publishDate: new Date().toLocaleDateString(),
     dates,
     body,
     topic,

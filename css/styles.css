@@ -318,7 +318,7 @@ header ul li ul li a:hover
     height: 270px;
     margin: 20px auto;
     border-radius: 5px;
-    background: rgb(217, 216, 216);
+    background: linear-gradient(0deg, white, rgb(173, 169, 169));
     position: relative;
     border-radius: 5px;
 
@@ -337,6 +337,8 @@ header ul li ul li a:hover
     width: 75px;
     float: left;
     margin-right: 10px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .content .main-content .post .read-more

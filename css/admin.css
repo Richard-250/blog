@@ -154,3 +154,105 @@ button.save-topic
   overflow: scroll;
   white-space: nowrap;
 }
+
+
+.main-post
+{
+    width: 95%;
+    max-width: 1500px;
+    height: 100%;
+    margin-top: 40px !important;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+}
+
+.single-post
+{
+    position: relative;
+    background: linear-gradient(0deg, white, rgb(154, 151, 151));
+    width: 70%;
+    /* box-shadow: 0 0 10px 1px  hsla(0, 0%, 0%, 0.1); */
+    padding: 10px;
+    border-radius: 5px;
+    /* box-shadow: 0 0 2px 0.9px #222323; */
+    overflow: scroll;
+}
+
+.side-topics
+{
+    width: 30%;
+    border-left: 0.1px solid black;
+
+}
+
+.image
+{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.postpreview
+{
+    width: 100%;
+    height: auto; 
+    
+}
+
+.postpreview .user-icons 
+{
+    display: flex;
+    column-gap: 20px;
+    font-size: 1.6rem;
+}
+
+.postpreview .user-icons i span
+{
+    font-size: 1.3rem;
+
+}
+
+.postpreview .user-icons i:hover
+{
+    color: #007e83;
+}
+
+.postpreview .likes
+{
+    display: flex;
+    gap: 0.7rem;
+}
+
+.postpreview .likes button
+{
+    cursor: pointer;
+}
+
+.postpreview .likes button i
+{
+    font-size: 1.2rem;
+    
+}
+
+li
+{
+    list-style: none;
+}
+
+.main-post .topics ul li a
+{
+    
+    display: block;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0 15px 0;
+    transition: all  0.5s;
+    list-style: none;
+}
+
+.main-post .topics ul li a:hover
+{
+    padding-left: 10px;
+    transition: all  0.5s;
+}

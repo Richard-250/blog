@@ -49,6 +49,7 @@ function editPost(index) {
     document.getElementById("editAuthor").value = post.author;
     document.getElementById("editDates").value = post.dates;
     document.getElementById("editTopic").value = post.topic;
+  
     
 
     CKEDITOR.instances.editor.setData(post.body);
@@ -105,8 +106,6 @@ function deletePost(index) {
   }
   
     
-  
-
   window.onload = displayPosts;
 // // Function to publish a post
 // function publish(index) {
