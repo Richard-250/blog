@@ -115,13 +115,14 @@ function displayUsers() {
 
 function deleteUser(index) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
+ 
 
   // Remove user at the specified index
   users.splice(index, 1);
-
+ 
   // Save updated array to local storage
   localStorage.setItem('users', JSON.stringify(users));
-
+ 
   // Update the table
   displayUsers();
 }
@@ -204,3 +205,5 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
 
 
 
+ // const removeUserId = JSON.parse(localStorage.getItem('currentUserId')) || [];
+  // removeUserId.splice(index, 1)
