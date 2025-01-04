@@ -91,89 +91,87 @@ document.getElementById('searchForm').addEventListener('submit', function (event
  });
  
 
-// const publishedPosts = JSON.parse(localStorage.getItem('Posts')) || [];
-// console.log(publishedPosts)
-// const container = document.getElementById('publishedPostsContainer');
+ function sendComment(postId) {
+  
+  const commentsDiv = document.querySelector(".comments");
+  if (commentsDiv) {
+    commentsDiv.hidden = false;
+  }
+}
 
-// container.innerHTML = '';
+function sendMessage() {
+  const textarea = document.querySelector(".comment-body");
+  const commentText = textarea?.value.trim();
 
-// publishedPosts.forEach(post => {
-//     const postElement = document.createElement('div');
-//     postElement.className = 'post clearfix';
-    
-//     const publishDate = new Date(post.publishDate).toLocaleDateString();
-    
-//     postElement.innerHTML = `
-//         <img src="${post.image}" alt="${post.title}" class="post-image">
-//         <div class="post-preview">
-//         <h2><a href="./pages/single.html"> ${post.title}</a></h2>
-//         <i class="far fa-user">${post.author}</i>
-//          &nbsp;
-//            <i class="far fa-calendar">${post.dates}</i>
-//             <p class="preview-text">${post.body}</p>
-//             <p>Published: ${publishDate}</p>
-//             <p>Topic: ${post.topic}</p>
-//         <a href="./pages/single.html" class="btn read-more">Read More</a>
-//         </div>
-//     `;
-    
-//     container.appendChild(postElement);
-// });
+  if (!commentText) {
+    alert("Please write a comment before sending!");
+    return;
+  }
+
+  
+  const singlePost = posts.find((post) => post.id == id);
+  if (!singlePost) {
+    console.error("Post not found!");
+    return;
+  }
+
+  // Initialize comments array if it doesn't exist
+  singlePost.comments = singlePost.comments || [];
+
+  // Add the comment
+  singlePost.comments.push({
+    userId: currentUser.id,
+    body: commentText,
+    timestamp: new Date().toISOString(),
+  });
+
+  // Save updated posts to localStorage
+  localStorage.setItem("posts", JSON.stringify(posts));
+
+  // Clear the textarea
+  textarea.value = "";
+
+  // Refresh the comments section
+  displayComments(singlePost.comments);
+}
+
+function displayComments(comments) {
+  const commentsContainer = document.getElementById("upLoadedComments");
+  if (!commentsContainer) return;
+
+  // Clear existing comments
+  commentsContainer.innerHTML = "";
+
+  // Add each comment
+  comments.forEach((comment) => {
+    const commentElement = document.createElement("div");
+    commentElement.classList.add("comment");
+    commentElement.innerHTML = `
+      <p><strong>User ${comment.userId}:</strong> ${comment.body}</p>
+      <small>${new Date(comment.timestamp).toLocaleString()}</small>
+    `;
+    commentsContainer.appendChild(commentElement);
+  });
+}
+
+// Attach an event listener to the textarea to enable/disable the send button
+document.querySelector(".comment-body")?.addEventListener("input", function () {
+  const sendButton = document.querySelector(".submit");
+  if (this.value.trim()) {
+    sendButton.disabled = false;
+  } else {
+    sendButton.disabled = true;
+  }
+});
+
+// Initialize comments if any
+const singlePost = posts.find((post) => post.id == id);
+if (singlePost?.comments) {
+  displayComments(singlePost.comments);
+}
 
 
 
 
-// Load posts when page loads
-// window.onload = displayPublishedPosts;
 
 
-// function publish(index) {
-   
-//     const posts = JSON.parse(localStorage.getItem('posts')) || [];
-//     console.log(posts)
-//     const post = posts[index];
-
-//     if (!post) {
-//         alert("Post not found!");
-//         return;
-//     }
-
-//  // Retrieve existing published posts or initialize an empty array
-//  const publishedPosts = JSON.parse(localStorage.getItem('publishedPosts')) || [];
-//  publishedPosts.push(post);
-
-//  // Save published posts to localStorage
-//  localStorage.setItem('publishedPosts', JSON.stringify(publishedPosts));
-
-//  console.log(publishedPosts)
-//  alert("Post published successfully!");
-   
-// }
-
-// window.onload = displayPosts;
-
-
-
-
-
- // const postsDisplay = document.getElementById("postsDisplay").style.display = "none";
-    
-    // postsDisplay.innerHTML = ""; // Clear the display section
-
-    // const postHTML = `
-    //     <div class="post clearfix">
-    //         <img src="${post.image || './image/default.jpg'}" alt="" class="post-image">
-    //         <div class="post-preview">
-    //             <h2><a href="./pages/single.html"> ${post.title}</a></h2>
-    //             <i class="far fa-user">${post.author}</i>
-    //             &nbsp;
-    //             <i class="far fa-calendar">${post.dates}</i>
-    //             <p class="preview-text">
-    //                 ${post.topic || "No topic available"}
-    //             </p>
-    //             <a href="./pages/single.html" class="btn read-more">Read More</a>
-    //         </div>
-    //     </div>
-    // `;
-
-    // postsDisplay.innerHTML = postHTML; // Add the post to the display container

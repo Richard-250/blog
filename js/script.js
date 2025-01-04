@@ -75,12 +75,13 @@ function regist(event) {
       password,
      });
 
+     
   // Save updated array to local storage
   localStorage.setItem('users', JSON.stringify(users));
 
-  localStorage.setItem('currentUserId', JSON.stringify (userId));
+  localStorage.setItem('currentUserId', JSON.stringify({ id: userId }));
 
-  alert("Registration successful!");
+  alert("Registration and login have been successful!");
   form.reset();
   displayUsers();
 }
@@ -115,7 +116,12 @@ function displayUsers() {
 
 function deleteUser(index) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
- 
+  const currentUserId = JSON.parse(localStorage.getItem('currentUserId'));
+
+  if (users[index] && currentUserId && users[index].id === currentUserId.id) {
+    // Remove current user ID from local storage
+    localStorage.removeItem('currentUserId');
+  }
 
   // Remove user at the specified index
   users.splice(index, 1);
@@ -204,6 +210,3 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
 
 
 
-
- // const removeUserId = JSON.parse(localStorage.getItem('currentUserId')) || [];
-  // removeUserId.splice(index, 1)

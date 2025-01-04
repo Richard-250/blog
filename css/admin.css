@@ -238,6 +238,49 @@ button.save-topic
 
 }
 
+.comment-button
+{
+
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.input-container {
+    position: relative;
+    width: 100%; 
+}
+.comment-button i
+{
+    font-size: 1.1rem;
+}
+
+.comment-body
+{
+    position: relative;
+    width: 100%;
+    height: 100px; /* Set the desired height */
+    padding-right: 40px; /* Space for the button */
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none; 
+}
+
+.submit
+{
+    position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1.5rem;
+}
+
 .postpreview .likes button i
 {
     font-size: 1.2rem;
@@ -263,4 +306,15 @@ li
 {
     padding-left: 10px;
     transition: all  0.5s;
+}
+
+.comments 
+{
+    margin-top: 20px;
+    
+}
+
+.comments ::placeholder
+{
+    color: black;
 }
