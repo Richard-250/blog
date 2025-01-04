@@ -90,12 +90,23 @@ document.getElementById('searchForm').addEventListener('submit', function (event
    }
  });
  
-
  function sendComment(postId) {
-  
+  // Get the comments div and unhide it
   const commentsDiv = document.querySelector(".comments");
   if (commentsDiv) {
     commentsDiv.hidden = false;
+  }
+
+  // Find the specific post
+  const singlePost = posts.find((post) => post.id == postId);
+  if (!singlePost) {
+    console.error("Post not found!");
+    return;
+  }
+
+  // Display existing comments
+  if (singlePost.comments) {
+    displayComments(singlePost.comments, postId);
   }
 }
 
@@ -108,7 +119,7 @@ function sendMessage() {
     return;
   }
 
-  
+  // Find the specific post
   const singlePost = posts.find((post) => post.id == id);
   if (!singlePost) {
     console.error("Post not found!");
@@ -123,6 +134,7 @@ function sendMessage() {
     userId: currentUser.id,
     body: commentText,
     timestamp: new Date().toISOString(),
+    id: Date.now(), // Unique ID for the comment
   });
 
   // Save updated posts to localStorage
@@ -132,10 +144,10 @@ function sendMessage() {
   textarea.value = "";
 
   // Refresh the comments section
-  displayComments(singlePost.comments);
+  displayComments(singlePost.comments, id);
 }
 
-function displayComments(comments) {
+function displayComments(comments, postId) {
   const commentsContainer = document.getElementById("upLoadedComments");
   if (!commentsContainer) return;
 
@@ -149,9 +161,30 @@ function displayComments(comments) {
     commentElement.innerHTML = `
       <p><strong>User ${comment.userId}:</strong> ${comment.body}</p>
       <small>${new Date(comment.timestamp).toLocaleString()}</small>
+      <button class="delete-comment" onclick="deleteComment(${postId}, ${comment.id})">
+        <i class="bx bx-trash"></i>
+      </button>
     `;
     commentsContainer.appendChild(commentElement);
   });
+}
+
+function deleteComment(postId, commentId) {
+  // Find the specific post
+  const singlePost = posts.find((post) => post.id == postId);
+  if (!singlePost) {
+    console.error("Post not found!");
+    return;
+  }
+
+  // Filter out the comment to delete
+  singlePost.comments = singlePost.comments.filter((comment) => comment.id !== commentId);
+
+  // Save updated posts to localStorage
+  localStorage.setItem("posts", JSON.stringify(posts));
+
+  // Refresh the comments section
+  displayComments(singlePost.comments, postId);
 }
 
 // Attach an event listener to the textarea to enable/disable the send button
@@ -167,11 +200,34 @@ document.querySelector(".comment-body")?.addEventListener("input", function () {
 // Initialize comments if any
 const singlePost = posts.find((post) => post.id == id);
 if (singlePost?.comments) {
-  displayComments(singlePost.comments);
+  displayComments(singlePost.comments, id);
 }
 
 
 
 
+// // Initialize the emoji picker
+// const emojiPicker = new EmojiButton();
+
+// // Get references to the textarea and emoji button
+// const textarea = document.getElementById('editor');
+// const emojiButton = document.getElementById('emoji-button');
+
+// // Attach the emoji picker to the button
+// emojiButton.addEventListener('click', () => {
+//   emojiPicker.togglePicker(emojiButton); // Show/hide emoji picker
+// });
+
+// // Insert the selected emoji into the textarea
+// emojiPicker.on('emoji', (emoji) => {
+//   textarea.value += emoji; // Append emoji to the existing text
+//   textarea.dispatchEvent(new Event('input')); // Trigger 'input' event to enable/disable send button
+// });
+
+// // Enable or disable the send button based on textarea content
+// textarea.addEventListener('input', () => {
+//   const sendButton = document.querySelector('.submit');
+//   sendButton.disabled = textarea.value.trim() === ''; // Disable if empty
+// });
 
 

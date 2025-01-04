@@ -44,6 +44,7 @@ function getSinglePost() {
  
                      <div class="input-container">
                   <textarea class="comment-body" id="editor" placeholder="Write a comment..."></textarea>
+                    <button id="emoji-button" class="emoji-button">😊</button>
                   <button class="submit" onclick="sendMessage()"><i class='bx bx-send'></i></button>
                   </div>
      </div>           
@@ -123,3 +124,30 @@ function updateLikeButtonColor(postId) {
 
 // Initialize the single post view
 getSinglePost();
+
+
+
+// // Initialize the emoji picker
+// const emojiPicker = new EmojiButton();
+
+// // Get references to the textarea and emoji button
+// const textarea = document.getElementById('editor');
+// const emojiButton = document.getElementById('emoji-button');
+
+// // Attach the emoji picker to the button
+// emojiButton.addEventListener('click', () => {
+//   emojiPicker.togglePicker(emojiButton); // Show/hide emoji picker
+// });
+
+// // Insert the selected emoji into the textarea
+// emojiPicker.on('emoji', (emoji) => {
+//   textarea.value += emoji; // Append emoji to the existing text
+//   textarea.dispatchEvent(new Event('input')); // Trigger 'input' event to enable/disable send button
+// });
+
+// // Enable or disable the send button based on textarea content
+// textarea.addEventListener('input', () => {
+//   const sendButton = document.querySelector('.submit');
+//   sendButton.disabled = textarea.value.trim() === ''; // Disable if empty
+// });
+
