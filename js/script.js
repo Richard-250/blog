@@ -57,10 +57,15 @@ function regist(event) {
   event.preventDefault();
 
   const form = document.querySelector('form');
-  const username = form.username.value;
-  const email = form.email.value;
+  const username = form.username.value.trim();
+  const email = form.email.value.trim();
   const password = form.password.value;
   const passwordConf = form.passwordConf.value;
+
+  if (!username || !email || !password || !passwordConf) {
+    alert("All fields are required!");
+    return;
+  }
 
   if (password !== passwordConf) {
       alert("Passwords do not match!");
@@ -69,6 +74,11 @@ function regist(event) {
 
   // Fetch existing users or initialize an empty array
   const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  if (users.some(user => user.username === username || user.email === email)) {
+    alert("Username or email already exists!");
+    return;
+  }
 
   const userId = Date.now();
   // Add new user

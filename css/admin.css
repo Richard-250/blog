@@ -340,3 +340,34 @@ li
 {
     color: #007e83;
 }
+
+.comment-user-info
+{
+    display: flex;
+    
+}
+
+.user-initial {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color:  #007e83;
+    color: white;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+
+  .dates-time
+  {
+    background: rgb(255, 254, 254);
+    height: auto;
+    width: auto;
+    margin-bottom: 2rem;
+    padding: 2px 15px;
+    border-radius: 10px;
+    text-align: center;
+  }

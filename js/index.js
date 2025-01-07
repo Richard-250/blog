@@ -110,6 +110,16 @@ document.getElementById('searchForm').addEventListener('submit', function (event
   }
 }
 
+function getUsernameInitial() {
+  // Retrieve the current user's data
+  const currentUser = JSON.parse(localStorage.getItem("currentUserId"));
+  if (currentUser && currentUser.username) {
+    // Get the first letter of the username and return it
+    return currentUser.username.charAt(0).toUpperCase();
+  }
+  return null; // Return null if no username is found
+}
+
 function sendMessage() {
   const textarea = document.querySelector(".comment-body");
   const commentText = textarea?.value.trim();
@@ -118,6 +128,13 @@ function sendMessage() {
     alert("Please write a comment before sending!");
     return;
   }
+
+ // Retrieve the current user's data
+ const currentUser = JSON.parse(localStorage.getItem("currentUserId"));
+ if (!currentUser || !currentUser.username) {
+   alert("User is not logged in!");
+   return;
+ }
 
   // Find the specific post
   const singlePost = posts.find((post) => post.id == id);
@@ -132,6 +149,7 @@ function sendMessage() {
   // Add the comment
   singlePost.comments.push({
     userId: currentUser.id,
+    username: currentUser.username,
     body: commentText,
     timestamp: new Date().toISOString(),
     id: Date.now(), // Unique ID for the comment
@@ -156,14 +174,27 @@ function displayComments(comments, postId) {
 
   // Add each comment
   comments.forEach((comment) => {
+    const firstLetter = comment.username.charAt(0).toUpperCase();
+
     const commentElement = document.createElement("div");
+
     commentElement.classList.add("comment");
+
     commentElement.innerHTML = `
-      <p><strong>User ${comment.userId}:</strong> ${comment.body}</p>
+    <div class="comment-user-info">
+ <div class="comment-header">
+    <span class="user-initial">${firstLetter}</span>
+      
+      </div>
+
+      <div class="dates-time">
+      <p><strong> ${comment.body}</p>
       <small>${new Date(comment.timestamp).toLocaleString()}</small>
       <button class="delete-comment" onclick="deleteComment(${postId}, ${comment.id})">
         <i class="bx bx-trash"></i>
       </button>
+      </div>
+      </div>
     `;
     commentsContainer.appendChild(commentElement);
   });
