@@ -222,6 +222,7 @@ header ul li ul li a:hover
 
 .post-slider .slider-title
 {
+    
     text-align: center;
     margin: 30px auto;
 }
@@ -709,11 +710,13 @@ header ul li ul li a:hover
 
      header ul li
      {
+        
         width: 100%;
      }
 
      header ul li ul
 {
+
     position: static;
     width: 180px;
     display: block;

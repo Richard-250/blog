@@ -1,3 +1,8 @@
+ function dashboard() {
+  window.location.href = "./admin/posts/index.html"
+ }
+ 
+ 
  $(document).ready(function() {
     $('.menu-toggle').on('click', function() {
         $('.nav').toggleClass('showing')
@@ -79,7 +84,7 @@ function regist(event) {
   // Save updated array to local storage
   localStorage.setItem('users', JSON.stringify(users));
 
-  localStorage.setItem('currentUserId', JSON.stringify({ id: userId }));
+  localStorage.setItem('currentUserId', JSON.stringify({ id: userId, username }));
 
   alert("Registration and login have been successful!");
   form.reset();
