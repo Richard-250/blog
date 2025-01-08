@@ -36,7 +36,15 @@ function getSinglePost() {
         <i class="bx bx-message-dots"></i>
         </button>
         </div>
-        <i class="bx bx-share"></i>
+
+        <i class="bx bx-share" onclick="share()"></i>
+
+        <div class="socials icon-space">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://my-awesome-project-ten-self.vercel.app" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/sharer/sharer.php?u=https://my-awesome-project-ten-self.vercel.app" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com/sharer/sharer.php?u=https://my-awesome-project-ten-self.vercel.app" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/sharer/sharer.php?u=https://my-awesome-project-ten-self.vercel.app" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                </div>
       </div>
 
       <div class="comments" hidden>
@@ -53,6 +61,11 @@ function getSinglePost() {
   `;
 
   updateLikeButtonColor(id);
+}
+
+function share() {
+  const shareIcons = document.querySelector('.icon-space');
+  shareIcons.classList.toggle('visible');
 }
 
 function toggleLike(postId) {

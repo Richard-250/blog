@@ -543,6 +543,23 @@ header ul li ul li a:hover
     transition: all 0.5s;
 }
 
+.bx-share
+{
+    cursor: pointer;
+}
+.icon-space
+{
+    display: none;
+}
+.icon-space.visible
+{
+    display: flex;
+}
+.icon-space a
+{
+    padding-right: 25px;
+}
+
 .footer .footer-content .about  .socials a:hover
 {
     border: 1px solid white;
@@ -573,7 +590,7 @@ header ul li ul li a:hover
     line-height: 1.5rem;
     padding: .9rem 1.4rem;
     border: none;
-
+    resize: none;
 }
 
 .footer .footer-content .contact-form .contact-input:focus

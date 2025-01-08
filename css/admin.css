@@ -371,3 +371,23 @@ li
     border-radius: 10px;
     text-align: center;
   }
+
+  @media only screen and (max-width: 641px)
+  {
+    .main-post
+    {
+        display: block;
+        overflow: scroll;
+    }
+    .single-post
+    {
+
+        width: 100%;
+       
+    }
+    .side-topics
+    {
+        width: 50%;
+    }
+    
+  }
