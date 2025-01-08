@@ -9,8 +9,8 @@ function displayPosts() {
       
     tablesBody.innerHTML = "";
   
-    
-    posts.forEach((post, index) => {
+      
+      posts.forEach((post, index) => {
       const rows = document.createElement("tr");
   
       rows.innerHTML = `
@@ -108,6 +108,37 @@ function deletePost(index) {
     
   window.onload = displayPosts;
 
+
+
+// const button = document.querySelector('button')
+
+// button.addEventListener('click', () => {
+//   Notification.requestPermission().then(perm => {
+//    if (perm === true) {
+//     new Notification("Example notification")
+//    }
+//   })
+// })
+
+// function displayTopic() {
+//   const posts = JSON.parse(localStorage.getItem('posts')) || []
+  
+//   const topicList = document.querySelector("#topicDisplay")  
+  
+//   topicList.innerHTML = "";
+
+//   posts.forEach((post, index) => {
+//      const lists = document.createElement("li");
+
+//      lists.innerHTML = `
+//      <li>${post.topic}</li>
+     
+//      `
+//      topicList.appendChild(lists)
+
+//   })
+// }
+// displayTopic()
 
 
 

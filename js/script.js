@@ -231,14 +231,19 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
 
   event.preventDefault(); 
 
-  const title = document.getElementById('title').value;
-  const author = document.getElementById('author').value;
-  const dates = document.getElementById('dates').value;
-  const image = document.getElementById('image').files[0]; // File object
-  const body = CKEDITOR.instances.editor.getData();
-  const topic = document.getElementById('topic').value;
+  const title = document.getElementById('title').value.trim();
+  const author = document.getElementById('author').value.trim();
+  const dates = document.getElementById('dates').value.trim();
+  const image = document.getElementById('image').files[0]; 
+  const body = CKEDITOR.instances.editor.getData().trim();
+  const topic = document.getElementById('topic').value.trim();
+  const addTopic = document.getElementById('addTopic').value.trim();
 
-  // Create post data object
+  if (!title || !author || !dates || !body || (!topic && !addTopic)) {
+    alert("Please fill in all required fields. Topic or Add Topic must be selected.");
+    return;
+  }
+  
   const postData = {
     id: Date.now(),
     title,
@@ -246,8 +251,13 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
     publishDate: new Date().toLocaleDateString(),
     dates,
     body,
-    topic,
+    topic: addTopic || topic,
   };
+
+  if (topic && addTopic) {
+    document.getElementById('topic').value = ""; 
+    postData.topic = addTopic; 
+  }
 
   // Function to save data to localStorage
   const savePost = (post) => {
