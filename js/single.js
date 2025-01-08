@@ -140,27 +140,71 @@ getSinglePost();
 
 
 
-// // Initialize the emoji picker
-// const emojiPicker = new EmojiButton();
+function leaveMessage(event) {
+  event.preventDefault(); // Prevent form submission and page reload
 
-// // Get references to the textarea and emoji button
-// const textarea = document.getElementById('editor');
-// const emojiButton = document.getElementById('emoji-button');
+  const form = event.target; // Get the form element
+  const emailInput = form.querySelector('input[name="email"]');
+  const messageTextarea = form.querySelector('textarea[name="message"]');
+  const email = emailInput.value.trim();
+  const message = messageTextarea.value.trim();
 
-// // Attach the emoji picker to the button
-// emojiButton.addEventListener('click', () => {
-//   emojiPicker.togglePicker(emojiButton); // Show/hide emoji picker
-// });
+  const emailError = form.querySelector(".email-error");
+  const messageError = form.querySelector(".message-error");
 
-// // Insert the selected emoji into the textarea
-// emojiPicker.on('emoji', (emoji) => {
-//   textarea.value += emoji; // Append emoji to the existing text
-//   textarea.dispatchEvent(new Event('input')); // Trigger 'input' event to enable/disable send button
-// });
+  // Clear previous error messages
+  emailError.textContent = "";
+  messageError.textContent = "";
 
-// // Enable or disable the send button based on textarea content
-// textarea.addEventListener('input', () => {
-//   const sendButton = document.querySelector('.submit');
-//   sendButton.disabled = textarea.value.trim() === ''; // Disable if empty
-// });
+  // Email validation using regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    emailError.textContent = "Please enter a valid email address.";
+    return;
+  }
+
+  // Message validation: Ensure it's not empty and has at least 10 characters
+  if (message.length < 5) {
+    messageError.textContent = "Message must be at least 5 characters long.";
+    return;
+  }
+
+  // Retrieve existing messages or initialize an empty array
+  const messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  // Create the new message object
+  const newMessage = {
+    email,
+    message,
+    timestamp: new Date().toISOString(),
+    id: Date.now(), // Unique ID for the message
+  };
+
+  // Add the new message to the array
+  messages.push(newMessage);
+
+  // Save updated messages array to localStorage
+  localStorage.setItem("messages", JSON.stringify(messages));
+
+  // Clear the form inputs
+  emailInput.value = "";
+  messageTextarea.value = "";
+
+  // Display the success message
+  const messageStatus = document.createElement("div");
+  messageStatus.innerHTML = `
+    <p class="message-disp">
+      Message is sent <i class="fas fa-check-circle"></i>
+    </p>
+  `;
+  form.appendChild(messageStatus);
+
+  // Remove the success message after 3 seconds
+  setTimeout(() => {
+    messageStatus.remove();
+  }, 3000);
+}
+
+
+
 

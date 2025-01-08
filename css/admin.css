@@ -391,3 +391,24 @@ li
     }
     
   }
+
+  .email-error, .message-error
+  {
+    color: red;
+    font-size: 12px;
+  }
+
+  .fa-check-circle
+  {
+    margin-left: 8px;
+    font-size: 20px;
+  }
+
+  .message-disp
+  {
+    color: green;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }

@@ -193,15 +193,20 @@
             <div class="footer-section contact-form">
                 <h2>Contacts Us</h2>
                 <br>
-                <form action="./index.html" method="post">
+                <form onsubmit="leaveMessage(event)">
                     <input type="email" name="email" class="text-input contact-input"
                         placeholder="Your email address...">
+
+                        <small class="email-error"></small>
+
                     <textarea rows="4" name="message" id="text-input contact-input" class="text-input contact-input"
                         placeholder="Your message..."></textarea>
 
+                        <small class="message-error"></small>
+
                     <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Send</button>
+                        <i class="fas fa-envelope"></i>Send
+                    </button>
                 </form>
             </div>
         </div>

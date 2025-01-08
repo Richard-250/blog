@@ -62,44 +62,95 @@ function regist(event) {
   const password = form.password.value;
   const passwordConf = form.passwordConf.value;
 
-  if (!username || !email || !password || !passwordConf) {
-    alert("All fields are required!");
-    return;
+  // Validate fields and show real-time feedback
+  let isValid = true;
+
+  const usernameError = document.getElementById('usernameError');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  const passwordConfError = document.getElementById('passwordConfError');
+
+  const resetErrorState = () => {
+    document.querySelectorAll('.error').forEach(span => (span.textContent = ''));
+    document.querySelectorAll('.text-input').forEach(input => input.classList.remove('error'));
+  };
+
+  resetErrorState();
+
+  // Username validation
+  if (!username) {
+    isValid = false;
+    usernameError.textContent = 'Username is required.';
+    form.username.classList.add('error');
+  } else if (!/^[a-zA-Z0-9_]{3,15}$/.test(username)) {
+    isValid = false;
+    usernameError.textContent = 'Username must be 3-15 characters and contain only letters, numbers, or underscores.';
+    form.username.classList.add('error');
   }
 
-  if (password !== passwordConf) {
-      alert("Passwords do not match!");
-      return;
+  // Email validation
+  if (!email) {
+    isValid = false;
+    emailError.textContent = 'Email is required.';
+    form.email.classList.add('error');
+  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+    isValid = false;
+    emailError.textContent = 'Invalid email format.';
+    form.email.classList.add('error');
   }
 
-  // Fetch existing users or initialize an empty array
+  // Password validation
+  if (!password) {
+    isValid = false;
+    passwordError.textContent = 'Password is required.';
+    form.password.classList.add('error');
+  } else if (password.length < 8) {
+    isValid = false;
+    passwordError.textContent = 'Password must be at least 8 characters long.';
+    form.password.classList.add('error');
+  }
+
+  // Password confirmation validation
+  if (!passwordConf) {
+    isValid = false;
+    passwordConfError.textContent = 'Password confirmation is required.';
+    form.passwordConf.classList.add('error');
+  } else if (password !== passwordConf) {
+    isValid = false;
+    passwordConfError.textContent = 'Passwords do not match.';
+    form.passwordConf.classList.add('error');
+  }
+
+  if (!isValid) return;
+
+  // Check for existing users
   const users = JSON.parse(localStorage.getItem('users')) || [];
 
   if (users.some(user => user.username === username || user.email === email)) {
-    alert("Username or email already exists!");
+    alert('Username or email already exists!');
     return;
   }
 
-  const userId = Date.now();
   // Add new user
-  users.push(
-    { 
-      id: userId,
-      username,
-     email,
-      password,
-     });
-
-     
-  // Save updated array to local storage
+  const userId = Date.now();
+  users.push({ id: userId, username, email, password });
   localStorage.setItem('users', JSON.stringify(users));
-
   localStorage.setItem('currentUserId', JSON.stringify({ id: userId, username }));
 
-  alert("Registration and login have been successful!");
+  alert('Registration and login have been successful!');
   form.reset();
-  displayUsers();
+  resetErrorState();
+  displayUsers(); // Optional: Implement to show registered users
 }
+
+// Real-Time Validation Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('registrationForm');
+  form.username.addEventListener('input', () => document.getElementById('usernameError').textContent = '');
+  form.email.addEventListener('input', () => document.getElementById('emailError').textContent = '');
+  form.password.addEventListener('input', () => document.getElementById('passwordError').textContent = '');
+  form.passwordConf.addEventListener('input', () => document.getElementById('passwordConfError').textContent = '');
+});
 
 function displayUsers() {
   const users = JSON.parse(localStorage.getItem('users')) || [];

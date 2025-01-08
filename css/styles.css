@@ -659,6 +659,14 @@ header ul li ul li a:hover
   }
 }
 
+.error {
+    color: red;
+    font-size: 0.9em;
+  }
+  .text-input.error {
+    border-color: red;
+  }
+
 @media only screen and (max-width: 813px)
 {
     .content
@@ -788,7 +796,7 @@ header .menu-toggle
     .content .main-content .post .post-image
     {
         width: 100%;
-    
+        
     }
 
     .content .main-content .post .post-preview
