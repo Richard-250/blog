@@ -141,6 +141,7 @@ header ul
  header .menu-toggle 
  {
     display: none;
+    cursor: pointer;
  }
 
  header ul li

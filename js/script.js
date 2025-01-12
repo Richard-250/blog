@@ -1,6 +1,3 @@
- function dashboard() {
-  window.location.href = "./admin/posts/index.html"
- }
  
  
  $(document).ready(function() {

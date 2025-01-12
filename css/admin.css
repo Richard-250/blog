@@ -22,8 +22,8 @@ header
     flex: 8;
    height: 100%;
    padding: 40px 100px 100px;
-   overflow-y: scroll;
-    border: 1px solid green;
+   overflow: scroll;
+    /* border: 1px solid green; */
 }
 
 .admin-wrapper .left-sidebar ul
@@ -69,6 +69,7 @@ table
     width: 100%;
     border-collapse: collapse;
     font-size: 1.1rem;
+    
 }
 
 th, td
@@ -371,6 +372,21 @@ li
     border-radius: 10px;
     text-align: center;
   }
+  .space-area
+  {
+      width: 100%;
+      resize: none;
+      border: none;
+      background: #e5f7fd;
+  }
+
+  @media only screen and (max-width: 710px)
+  {
+    .admin-wrapper .admin-content {
+        padding: 40px 10px;
+    }
+
+  }
 
   @media only screen and (max-width: 641px)
   {
@@ -411,4 +427,19 @@ li
     display: flex;
     align-items: center;
     margin-top: 10px;
+  }
+
+  @media only screen and (max-width: 565px)
+  {
+    .btn-big
+    {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+    }
+    
+    #postsContainer
+    {
+        overflow: scroll;
+    }
   }
