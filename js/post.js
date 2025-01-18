@@ -30,6 +30,8 @@ function displayPosts() {
     });
   }
 
+  displayPosts()
+
 //   <<<<<<<<<<< edit(index)>>>>>>>>>
   
 function editPost(index) {
